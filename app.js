@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
+const mysql = require("mysql");
 const config = require("./configuration/config");
 const UserRouter = require("./Routes/User");
-const mysql = require("mysql");
+const InputVerifRouter = require("./Routes/InputVerif");
 
 app.use(express.json());
 
+app.use(InputVerifRouter);
 app.use(UserRouter);
 
 const connection = mysql.createConnection(config.database);
