@@ -1,8 +1,38 @@
-class UserController {
+const User = require("../Services/User");
+const jwt = require("../configuration/jwt");
+const { SendSuccess } = require("../helpers/SendMessage");
 
-  GetUser(req, res, next) {
-    res.send('Hello World!');
+exports.CreateUser = async (req, res, next) => {
+  try {
+    const { username, password, email } = req.body;
+    if (!username || !password || !email) {
+      return next({ status: 400, message: "Missing input"});
+    }
+    try {
+      const user = await User.CreateUser(username, password, email);
+      res.status(201).send({ error: false ,message: "User created"});
+    } catch (error) {
+      return next({ status: 409, message: "User already exist" });
+    }
+  } catch (error) {
+    next({ status: 500, message: "Internal Server Error" });
   }
-}
+};
 
-module.exports = UserController; 
+exports.Login = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return next({ status: 400, message: "Missing input"});
+    }
+    try {
+      const user = await User.GetUser(username, password);
+      const token = await jwt.generateAccessToken(user[0]);
+      res.status(200).send(SendSuccess("User logged", { token }));
+    } catch (error) {
+      return next({ status: 404, message: "User not found" });
+    }
+  } catch (error) {
+    next({ status: 500, message: "Internal Server Error" });
+  }
+};
