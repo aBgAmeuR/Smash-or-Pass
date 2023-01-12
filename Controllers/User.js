@@ -36,3 +36,39 @@ exports.Login = async (req, res, next) => {
     next({ status: 500, message: "Internal Server Error" });
   }
 };
+
+exports.UpdateUser = async (req, res, next) => {
+  try {
+    const { username, password, email } = req.body;
+    if (!username || !password || !email) {
+      return next({ status: 400, message: "Missing input"});
+    }
+    try {
+      const user = await User.UpdateUser(username, password, email);
+      res.status(200).send({ error: false, message: "User updated" });
+    } catch (error) {
+      return next({ status: 404, message: "User not found" });
+    }
+  } catch (error) {
+    next({ status: 500, message: "Internal Server Error" });
+  }
+};
+
+exports.DeleteUser = async (req, res, next) => {
+  try {
+    const username = req.user.Pseudo_U;
+      console.log(username);
+    if (!username) {
+      return next({ status: 400, message: "Missing input"});
+    }
+    try {
+      const user = await User.DeleteUser(username);
+      res.status(200).send({ error: false, message: "User deleted" });
+    } catch (error) {
+      return next({ status: 404, message: "User not found" });
+    }
+  } catch (error) {
+    next({ status: 500, message: "Internal Server Error" });
+  }
+}
+

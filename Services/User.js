@@ -27,9 +27,9 @@ module.exports = {
     });
   },
 
-  async UpdateUser(id, username, password, email) {
+  async UpdateUser(username, password, email) {
     return new Promise((resolve, reject) => {
-      const query = `UPDATE UTILISATEUR SET Pseudo_U = '${username}', Mdp_U = '${password}', Mail_U = '${email}' WHERE Id_U = '${id}'`;
+      const query = `UPDATE UTILISATEUR SET Pseudo_U = '${username}', Mdp_U = '${password}', Mail_U = '${email}' WHERE Pseudo_U = '${username}'`;
       con.query(query, (err, result) => {
         if (err) {
           reject(new Error("User not found"));
@@ -40,9 +40,9 @@ module.exports = {
     }); 
   },
 
-  async DeleteUser(id) {
+  async DeleteUser(username) {
     return new Promise((resolve, reject) => {
-      const query = `DELETE FROM UTILISATEUR WHERE Id_U = '${id}'`;
+      const query = `DELETE FROM UTILISATEUR WHERE Pseudo_U = '${username}'`;
       con.query(query, (err, result) => {
 
         if (err) {
