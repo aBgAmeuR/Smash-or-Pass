@@ -25,4 +25,16 @@ module.exports = {
     });
   },
 
+  async GetSmashListItems(NameList) {
+    return new Promise((resolve, reject) => {
+      const query = `SELECT Img_Item, Nom_Item, Desc_Item, Smash_Item, Pass_Item FROM ITEMS WHERE Nom_List = '${NameList}' ORDER BY Img_Item ASC;`;
+      con.query(query, (err, result) => {
+        if (err) {
+          return reject(new Error("Aleady exist"));
+        }
+        resolve(result);
+      });
+    });
+  },
+
 };

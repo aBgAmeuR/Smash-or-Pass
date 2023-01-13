@@ -15,5 +15,6 @@ var upload = multer({ storage: storage })
 
 router.post('/smashlist', upload.single('img'), SmashListController.CreateSmashList);
 router.post('/smashlist/item', upload.single('img'), SmashListController.AddItemSmashList);
+router.get('/smashlist/item', SmashListController.GetSmashListItems);
 
 module.exports = router;

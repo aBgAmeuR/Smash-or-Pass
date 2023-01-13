@@ -1,4 +1,5 @@
 const sharp = require('sharp');
+const fs = require('fs');
 
 exports.SmashListCover = async (file, NameList) => {
   return new Promise((resolve, reject) => {
@@ -29,5 +30,14 @@ exports.SmashListItem = async (file, NameList, NameItem) => {
         }
         resolve(info);
       });
+  });
+};
+
+exports.SendItemImage = async (NameList, ItemsList) => {
+  return new Promise((resolve, reject) => {
+    ItemsList.forEach(async (item) => {
+      item.Img_Item = `${NameList}/${item.Img_Item}.webp`;
+    });
+    resolve(ItemsList);
   });
 };

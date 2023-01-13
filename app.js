@@ -6,6 +6,8 @@ const UserRouter = require("./Routes/User");
 const jwtRouter = require("./Routes/jwt");
 const SmashListRouter = require("./Routes/SmashList");
 
+app.use(express.static("img", { extensions: ["webp"] }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(middlewares.InputVerif);

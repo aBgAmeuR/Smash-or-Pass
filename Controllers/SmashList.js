@@ -1,6 +1,6 @@
 const SmashList = require("../Services/SmashList");
 const { SendSuccess } = require("../helpers/SendMessage");
-const { SmashListCover, SmashListItem } = require("../helpers/CompressIMG");
+const { SmashListCover, SmashListItem, SendItemImage } = require("../helpers/CompressIMG");
 const fs = require('fs');
 
 exports.CreateSmashList = async (req, res, next) => {
@@ -54,6 +54,18 @@ exports.AddItemSmashList = async (req, res, next) => {
     }
   } catch (error) {
     fs.unlinkSync(`./uploads/${req.file.filename}`)
+    next({ status: 500, message: "Internal Server Error" });
+  }
+};
+
+exports.GetSmashListItems = async (req, res, next) => {
+  try {
+    const NameList = req.body.name;
+    const Items = await SmashList.GetSmashListItems(NameList);
+    const ItemsList = await SendItemImage(NameList, Items);
+    if (ItemsList.length == 0) return next({ status: 404, message: "SmashList not found" });
+    res.status(200).send({ error: false, message: "SmashList found", data: ItemsList });
+  } catch (error) {
     next({ status: 500, message: "Internal Server Error" });
   }
 };
