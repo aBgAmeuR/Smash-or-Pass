@@ -12,10 +12,12 @@ exports.InputVerif = (req, res, next) => {
   });
   next();
 };
+
 exports.ErrorHandler = (Error, req, res, next) => {
   res.status(Error.status || 500);
   res.send({ "error": true, "message": Error.message || "Internal Server Error" });
 };
+
 exports.authenticateToken = (req, res, next) => {
   const token = req.headers.token;
   if (!token) return res.status(401).send({ "error": true, "message": "Missing token" });

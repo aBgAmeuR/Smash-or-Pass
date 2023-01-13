@@ -37,6 +37,7 @@ exports.Login = async (req, res, next) => {
   }
 };
 
+// TO DO : Update user
 exports.UpdateUser = async (req, res, next) => {
   try {
     const { username, password, email } = req.body;
@@ -57,7 +58,6 @@ exports.UpdateUser = async (req, res, next) => {
 exports.DeleteUser = async (req, res, next) => {
   try {
     const username = req.user.Pseudo_U;
-      console.log(username);
     if (!username) {
       return next({ status: 400, message: "Missing input"});
     }
