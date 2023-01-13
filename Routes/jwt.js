@@ -6,6 +6,6 @@ const { route } = require('./SmashList');
 router.put('/user', middlewares.authenticateToken);
 router.delete('/user', middlewares.authenticateToken);
 router.post('/smashlist', middlewares.authenticateToken);
-router.post('/smashlist/add', middlewares.authenticateToken);
+router.post('/smashlist/item', middlewares.authenticateToken);
 
 module.exports = router;

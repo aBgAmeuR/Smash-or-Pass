@@ -15,13 +15,14 @@ module.exports = {
 
   async AddItemSmashList(Img, Name, Description, NameList) {
     return new Promise((resolve, reject) => {
-      const query = `INSERT INTO ITEM_LIST (Img_Item, Nom_Item, Desc_Item, List_Item) VALUES ('${Img}', '${Name}', '${Description}', '${NameList}')`;
+      const query = `INSERT INTO ITEMS (Img_Item, Nom_Item, Desc_Item, Nom_List) VALUES ('${Img}', '${Name}', '${Description}', '${NameList}')`;
       con.query(query, (err, result) => {
-        if (err) return reject(new Error("Aleady exist"));
+        if (err) {
+          return reject(new Error("Aleady exist"));
+        }
         resolve(result);
       });
     });
-
   },
 
 };

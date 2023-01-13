@@ -3,8 +3,9 @@ const config = require("../configuration/config");
 
 exports.InputVerif = (req, res, next) => {
   if (req.body == null) next();
-  const regex = /[^A-Za-z0-9 .@]+/g;
+  const regex = /["']+/g;
   Object.entries(req.body).forEach(([key, value]) => {
+    console.log('ee');
     if (regex.test(value)) {
       res.status(400).send("Invalid input");
       return;
