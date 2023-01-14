@@ -36,7 +36,7 @@ exports.SmashListItem = async (file, NameList, NameItem) => {
 exports.SendItemImage = async (NameList, ItemsList) => {
   return new Promise((resolve, reject) => {
     ItemsList.forEach(async (item) => {
-      item.Img_Item = `${NameList}/${item.Img_Item}.webp`;
+      item.Image = `${NameList}/${item.Img_Item}.webp`;
     });
     resolve(ItemsList);
   });

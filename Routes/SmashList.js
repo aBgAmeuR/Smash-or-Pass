@@ -14,6 +14,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.post('/smashlist', upload.single('img'), SmashListController.CreateSmashList);
+router.get('/smashlist', SmashListController.GetSmashList);
 router.post('/smashlist/item', upload.single('img'), SmashListController.AddItemSmashList);
 router.get('/smashlist/item', SmashListController.GetSmashListItems);
 

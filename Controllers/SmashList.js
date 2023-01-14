@@ -61,11 +61,23 @@ exports.AddItemSmashList = async (req, res, next) => {
 exports.GetSmashListItems = async (req, res, next) => {
   try {
     const NameList = req.body.name;
-    const Items = await SmashList.GetSmashListItems(NameList);
+    const Items = await SmashList.GetSmashListItems(NameList)
     const ItemsList = await SendItemImage(NameList, Items);
     if (ItemsList.length == 0) return next({ status: 404, message: "SmashList not found" });
     res.status(200).send({ error: false, message: "SmashList found", data: ItemsList });
   } catch (error) {
+    next({ status: 500, message: "Internal Server Error" });
+  }
+};
+
+exports.GetSmashList = async (req, res, next) => {
+  try {
+    const NameList = req.body.name;
+    const Smashlist = await SmashList.GetSmashList(NameList);
+    if (!Smashlist) return next({ status: 404, message: "SmashList not found" });
+    res.status(200).send({ error: false, message: "SmashList found", data: Smashlist });
+  } catch (error) {
+    console.log(error);
     next({ status: 500, message: "Internal Server Error" });
   }
 };
