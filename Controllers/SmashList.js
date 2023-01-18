@@ -10,13 +10,13 @@ exports.CreateSmashList = async (req, res, next) => {
       return next({ status: 409, message: "SmashList already exist" });
     }
     const user = req.user.Pseudo_U;
-    const { name, description, categorie } = req.body;
-    if (!name || !description || !categorie || !user) {
+    const { name, description, category } = req.body;
+    if (!name || !description || !category || !user) {
       fs.unlinkSync(`./uploads/${req.file.filename}`)
       return next({ status: 400, message: "Missing input"});
     }
     try {
-      const smashlist = await SmashList.CreateSmashList(name, description, categorie, user);
+      const smashlist = await SmashList.CreateSmashList(name, description, category, user);
       res.status(201).send({ error: false, message: "Smash List created"});
 
       fs.mkdirSync(`./img/${req.body.name}`);

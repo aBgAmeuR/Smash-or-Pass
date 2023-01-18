@@ -1,0 +1,787 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Smash or Pass API",
+    "description": "The API makes it possible to manage the users of the application using a token and to manage the history of each user. It also allows you to create Smash Lists.",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "antoine.josset35@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "paths": {
+    "Schemes": "https",
+    "/user": {
+      "post": {
+        "summary": "",
+        "operationId": "Add_new_User",
+        "tags": ["User"],
+        "description": "To create a new user, send a POST request to the `/user` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "pseudo": "pseudo",
+                  "mail": "mail@gmail.com",
+                  "password": "password"
+                },
+                "properties": {
+                  "pseudo": {
+                    "type": "string"
+                  },
+                  "mail": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["pseudo", "mail", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This user has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "User created"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "This user already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "User already exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "",
+        "operationId": "Get_user_token",
+        "tags": ["User"],
+        "description": "To get a token, send a GET request to the `/user` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "username": "pseudo",
+                  "password": "azerty"
+                },
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This user has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "User logged",
+                    "data": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQc2V1ZG9fVSI6InBzZXVkbyIsIk1kcF9VIjoiYXplcnR5IiwiaWF0IjoxNjczNjQyMDg2LCJleHAiOjE2NzM3Mjg0ODZ9.3BB4IQxMU1hwtSZvejiGn6GyMxfRArnx5dGAsxSk1Yw"
+                    }
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This user doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "User doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "Delete_user",
+        "tags": ["User"],
+        "description": "To delete a user, send a DELETE request to the `/user` endpoint with a JSON object in the request body.",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The token of the user to delete",
+            "in": "header",
+            "name": "token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This user has been deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "User deleted"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This user doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "User doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smashlist": {
+      "post": {
+        "summary": "",
+        "operationId": "Post_smashlist",
+        "tags": ["Smashlist"],
+        "description": "To create a smashlist, send a POST request to the `/smashlist` endpoint with a JSON object in the request body.",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The token of the user to create the smashlist",
+            "in": "header",
+            "name": "token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "France",
+                  "description": "The best country in the world",
+                  "category": "country",
+                  "img": "image.png"
+                },
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "img": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "category",
+                  "img"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "This smashlist has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Smash List created"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist",
+        "tags": ["Smashlist"],
+        "description": "To get the smashlist, send a GET request to the `/smashlist` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "France"
+                },
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This smashlist has been get successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "SmashList found",
+                    "data": [
+                      {
+                        "Name": "France",
+                        "Description": "description",
+                        "Creator": "pseudo",
+                        "CreationDate": "2023-01-13T16:42:26.000Z",
+                        "Categorie": "Pays"
+                      }
+                    ]
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Name": {
+                            "type": "string"
+                          },
+                          "Description": {
+                            "type": "string"
+                          },
+                          "Creator": {
+                            "type": "string"
+                          },
+                          "CreationDate": {
+                            "type": "string"
+                          },
+                          "Categorie": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smashlist/item": {
+      "post": {
+        "summary": "",
+        "operationId": "Post_smashlist_item",
+        "tags": ["Smashlist"],
+        "description": "To create a new item in a smashlist, send a POST request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "The token of the user",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "France",
+                  "img": "image.png",
+                  "description": "description",
+                  "list": "Pays"
+                },
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "img": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "list": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "img", "description", "list"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
