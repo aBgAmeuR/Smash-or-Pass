@@ -17,5 +17,9 @@ router.post('/smashlist', upload.single('img'), SmashListController.CreateSmashL
 router.get('/smashlist', SmashListController.GetSmashList);
 router.post('/smashlist/item', upload.single('img'), SmashListController.AddItemSmashList);
 router.get('/smashlist/item', SmashListController.GetSmashListItems);
+router.get('/smashlist/length', SmashListController.GetSmashListLength);
+router.get('/smashlist/user', SmashListController.GetSmashListFromUser);
+
+
 
 module.exports = router;
