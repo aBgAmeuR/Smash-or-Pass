@@ -419,12 +419,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name",
-                  "description",
-                  "category",
-                  "img"
-                ]
+                "required": ["name", "description", "category", "img"]
               }
             }
           }
@@ -693,6 +688,835 @@
         },
         "responses": {
           "201": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_item",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "list": "Pays"
+                },
+                "properties": {
+                  "list": {
+                    "type": "string"
+                  }
+                },
+                "required": ["list"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smashlist/length": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_length",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "list": "Pays"
+                },
+                "properties": {
+                  "list": {
+                    "type": "string"
+                  }
+                },
+                "required": ["list"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smashlist/user": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_user",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "list": "Pays"
+                },
+                "properties": {
+                  "list": {
+                    "type": "string"
+                  }
+                },
+                "required": ["list"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/smashlist/category": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_category",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "list": "Pays"
+                },
+                "properties": {
+                  "list": {
+                    "type": "string"
+                  }
+                },
+                "required": ["list"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/history": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_user_history",
+        "tags": ["History"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "username": "Antoine"
+                },
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "",
+        "operationId": "Post_user_history",
+        "tags": ["History"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "username": "pseudo",
+                  "position": 2,
+                  "smashList": "France"
+                },
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "position": {
+                    "type": "integer"
+                  },
+                  "smashList": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "position", "smashList"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": false,
+                    "message": "Item added"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Missing input"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This smashlist doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Smashlist doesn't exist"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": true,
+                    "message": "Internal Server Error"
+                  },
+                  "properties": {
+                    "error": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "",
+        "operationId": "Patch_user_history",
+        "tags": ["History"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "username": "pseudo",
+                  "position": 1,
+                  "smashList": "France"
+                },
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "position": {
+                    "type": "integer"
+                  },
+                  "smashList": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "position", "smashList"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
             "description": "This item has been created successfully.",
             "content": {
               "application/json": {
