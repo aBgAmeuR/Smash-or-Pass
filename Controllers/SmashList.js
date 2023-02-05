@@ -105,3 +105,15 @@ exports.GetSmashListFromUser = async (req, res, next) => {
     next({ status: 500, message: "Internal Server Error" });
   }
 };
+
+exports.GetSmashListFromCategory = async (req, res, next) => {
+  try {
+    const Category = req.body.category;
+    const Smashlist = await SmashList.GetSmashListFromCategory(Category);
+    if (!Smashlist) return next({ status: 404, message: "SmashList not found" });
+    res.status(200).send({ error: false, message: "SmashList found", data: Smashlist });
+  } catch (error) {
+    console.log(error);
+    next({ status: 500, message: "Internal Server Error" });
+  }
+};
