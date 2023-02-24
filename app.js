@@ -2,19 +2,16 @@ const express = require("express");
 const app = express();
 const config = require("./configuration/config");
 const middlewares = require("./middlewares/middlewares");
-const fs = require('fs');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-
+const fs = require("fs");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 const UserRouter = require("./Routes/User");
 const jwtRouter = require("./Routes/jwt");
 const SmashListRouter = require("./Routes/SmashList");
-const HistoryRouter = require("./Routes/History"); 
-
+const HistoryRouter = require("./Routes/History");
 
 app.use(express.static("img", { extensions: ["webp"] }));
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

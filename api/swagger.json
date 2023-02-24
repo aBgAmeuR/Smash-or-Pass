@@ -1606,6 +1606,53 @@
           }
         }
       }
+    },
+    "/{smashlistName}/cover": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_cover",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [
+          {
+            "name": "smashlistName",
+            "in": "path",
+            "description": "The name of the smashlist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/{smashlistName}/{number}": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_item",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [
+          {
+            "name": "smashlistName",
+            "in": "path",
+            "description": "The name of the smashlist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "number",
+            "in": "path",
+            "description": "The number of the item",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
     }
   }
 }
