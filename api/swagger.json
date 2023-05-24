@@ -32,12 +32,12 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "pseudo": "pseudo",
+                  "username": "pseudo",
                   "mail": "mail@gmail.com",
                   "password": "password"
                 },
                 "properties": {
-                  "pseudo": {
+                  "username": {
                     "type": "string"
                   },
                   "mail": {
@@ -47,7 +47,7 @@
                     "type": "string"
                   }
                 },
-                "required": ["pseudo", "mail", "password"]
+                "required": ["username", "mail", "password"]
               }
             }
           }
