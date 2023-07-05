@@ -33,21 +33,21 @@
                 "type": "object",
                 "example": {
                   "username": "pseudo",
-                  "mail": "mail@gmail.com",
+                  "email": "mail@gmail.com",
                   "password": "password"
                 },
                 "properties": {
                   "username": {
                     "type": "string"
                   },
-                  "mail": {
+                  "email": {
                     "type": "string"
                   },
                   "password": {
                     "type": "string"
                   }
                 },
-                "required": ["username", "mail", "password"]
+                "required": ["username", "email", "password"]
               }
             }
           }
