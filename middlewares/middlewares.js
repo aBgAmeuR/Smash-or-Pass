@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 const config = require("../configuration/config");
 
 exports.InputVerif = (req, res, next) => {
-  if (req.body == null) next();
+  if (req.query == null) next();
   const regex = /["']+/g;
-  Object.entries(req.params).forEach(([key, value]) => {
+  Object.entries(req.query).forEach(([key, value]) => {
     if (regex.test(value)) {
       res.status(400).send("Invalid input");
       return;

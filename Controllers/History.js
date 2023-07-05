@@ -2,7 +2,7 @@ const History = require("../Services/History");
 
 exports.CreateHistory = async (req, res, next) => {
   try {
-    const { username, smashList, position } = req.params;
+    const { username, smashList, position } = req.query;
     if (!username || !smashList || !position) {
       return next({ status: 400, message: "Missing input" });
     }
@@ -19,7 +19,7 @@ exports.CreateHistory = async (req, res, next) => {
 
 exports.GetHistory = async (req, res, next) => {
   try {
-    const { username } = req.params;
+    const { username } = req.query;
     const history = await History.GetHistory(username);
     res.status(200).send({ error: false, message: "History", data: history });
   } catch (error) {
@@ -29,7 +29,7 @@ exports.GetHistory = async (req, res, next) => {
 
 exports.UpdateHistory = async (req, res, next) => {
   try {
-    const { username, smashList, position } = req.params;
+    const { username, smashList, position } = req.query;
     if (!username || !smashList || !position) {
       return next({ status: 400, message: "Missing input" });
     }
