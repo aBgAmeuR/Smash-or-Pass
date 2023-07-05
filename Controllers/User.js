@@ -4,7 +4,7 @@ const { SendSuccess } = require("../helpers/SendMessage");
 
 exports.CreateUser = async (req, res, next) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password, email } = req.params;
     if (!username || !password || !email) {
       return next({ status: 400, message: "Missing input"});
     }
@@ -21,7 +21,7 @@ exports.CreateUser = async (req, res, next) => {
 
 exports.Login = async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password } = req.params;
     if (!username || !password) {
       return next({ status: 400, message: "Missing input"});
     }
@@ -40,7 +40,7 @@ exports.Login = async (req, res, next) => {
 // TO DO : Update user
 exports.UpdateUser = async (req, res, next) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password, email } = req.params;
     if (!username || !password || !email) {
       return next({ status: 400, message: "Missing input"});
     }

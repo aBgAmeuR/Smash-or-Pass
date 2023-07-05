@@ -5,12 +5,12 @@ const fs = require('fs');
 
 exports.CreateSmashList = async (req, res, next) => {
   try {
-    if (fs.existsSync(`./img/${req.body.name}`)) {
+    if (fs.existsSync(`./img/${req.params.name}`)) {
       fs.unlinkSync(`./uploads/${req.file.filename}`)
       return next({ status: 409, message: "SmashList already exist" });
     }
     const user = req.user.Pseudo_U;
-    const { name, description, category } = req.body;
+    const { name, description, category } = req.params;
     if (!name || !description || !category || !user) {
       fs.unlinkSync(`./uploads/${req.file.filename}`)
       return next({ status: 400, message: "Missing input"});
@@ -19,8 +19,8 @@ exports.CreateSmashList = async (req, res, next) => {
       const smashlist = await SmashList.CreateSmashList(name, description, category, user);
       res.status(201).send({ error: false, message: "Smash List created"});
 
-      fs.mkdirSync(`./img/${req.body.name}`);
-      SmashListCover(`./uploads/${req.file.filename}`, req.body.name).then((info) => {
+      fs.mkdirSync(`./img/${req.params.name}`);
+      SmashListCover(`./uploads/${req.file.filename}`, req.params.name).then((info) => {
       fs.unlinkSync(`./uploads/${req.file.filename}`)
       })
     } catch (error) {
@@ -35,8 +35,8 @@ exports.CreateSmashList = async (req, res, next) => {
 
 exports.AddItemSmashList = async (req, res, next) => {
   try {
-    const lengthFile = await (await fs.promises.readdir(`./img/${req.body.list}`)).length;
-    const { list, name, description } = req.body;
+    const lengthFile = await (await fs.promises.readdir(`./img/${req.params.list}`)).length;
+    const { list, name, description } = req.params;
     if (!list || !name || !description) {
       fs.unlinkSync(`./uploads/${req.file.filename}`)
       return next({ status: 400, message: "Missing input" });
@@ -45,7 +45,7 @@ exports.AddItemSmashList = async (req, res, next) => {
       const item = await SmashList.AddItemSmashList(lengthFile, name, description, list);
       res.status(201).send({ error: false, message: "Item added" });
       
-      SmashListItem(`./uploads/${req.file.filename}`, req.body.list, lengthFile).then((info) => {
+      SmashListItem(`./uploads/${req.file.filename}`, req.params.list, lengthFile).then((info) => {
         fs.unlinkSync(`./uploads/${req.file.filename}`)
       });
     } catch (error) {
@@ -60,7 +60,7 @@ exports.AddItemSmashList = async (req, res, next) => {
 
 exports.GetSmashListItems = async (req, res, next) => {
   try {
-    const NameList = req.body.name;
+    const NameList = req.params.name;
     const Items = await SmashList.GetSmashListItems(NameList)
     const ItemsList = await SendItemImage(NameList, Items);
     if (ItemsList.length == 0) return next({ status: 404, message: "SmashList not found" });
@@ -72,7 +72,7 @@ exports.GetSmashListItems = async (req, res, next) => {
 
 exports.GetSmashList = async (req, res, next) => {
   try {
-    const NameList = req.body.name;
+    const NameList = req.params.name;
     const Smashlist = await SmashList.GetSmashList(NameList);
     if (!Smashlist) return next({ status: 404, message: "SmashList not found" });
     res.status(200).send({ error: false, message: "SmashList found", data: Smashlist });
@@ -84,7 +84,7 @@ exports.GetSmashList = async (req, res, next) => {
 
 exports.GetSmashListLength = async (req, res, next) => {
   try {
-    const NameList = req.body.name;
+    const NameList = req.params.name;
     const Smashlist = await SmashList.GetSmashListLength(NameList);
     if (!Smashlist) return next({ status: 404, message: "SmashList not found" });
     res.status(200).send({ error: false, message: "SmashList found", data: Smashlist });
@@ -96,7 +96,7 @@ exports.GetSmashListLength = async (req, res, next) => {
 
 exports.GetSmashListFromUser = async (req, res, next) => {
   try {
-    const User = req.body.username;
+    const User = req.params.username;
     const Smashlist = await SmashList.GetSmashListFromUser(User);
     if (!Smashlist) return next({ status: 404, message: "SmashList not found" });
     res.status(200).send({ error: false, message: "SmashList found", data: Smashlist });
@@ -108,7 +108,7 @@ exports.GetSmashListFromUser = async (req, res, next) => {
 
 exports.GetSmashListFromCategory = async (req, res, next) => {
   try {
-    const Category = req.body.category;
+    const Category = req.params.category;
     const Smashlist = await SmashList.GetSmashListFromCategory(Category);
     if (!Smashlist) return next({ status: 404, message: "SmashList not found" });
     res.status(200).send({ error: false, message: "SmashList found", data: Smashlist });

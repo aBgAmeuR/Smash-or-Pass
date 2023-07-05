@@ -4,7 +4,7 @@ const config = require("../configuration/config");
 exports.InputVerif = (req, res, next) => {
   if (req.body == null) next();
   const regex = /["']+/g;
-  Object.entries(req.body).forEach(([key, value]) => {
+  Object.entries(req.params).forEach(([key, value]) => {
     if (regex.test(value)) {
       res.status(400).send("Invalid input");
       return;
