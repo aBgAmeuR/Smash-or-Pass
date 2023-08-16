@@ -20,7 +20,6 @@ router.get('/smashlist/item', SmashListController.GetSmashListItems);
 router.get('/smashlist/length', SmashListController.GetSmashListLength);
 router.get('/smashlist/user', SmashListController.GetSmashListFromUser);
 router.get('/smashlist/category', SmashListController.GetSmashListFromCategory);
-
-
+router.get('/smashlist/all', SmashListController.GetAllSmashList);
 
 module.exports = router;

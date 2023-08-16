@@ -84,5 +84,17 @@ module.exports = {
       });
     });
   },
+
+  async GetAllSmashList() {
+    return new Promise((resolve, reject) => {
+      const query = `SELECT Nom_List AS Name, Desc_List AS Description, Createur_List AS Creator, Date_List AS CreationDate, Categorie_List AS Categorie FROM SMASH_LIST`;
+      con.query(query, (err, result) => {
+        if (err) {
+          return reject(new Error("Aleady exist"));
+        }
+        resolve(result);
+      });
+    });
+  }
   
 };
