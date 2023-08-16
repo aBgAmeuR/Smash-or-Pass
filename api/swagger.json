@@ -1244,6 +1244,47 @@
         }
       }
     },
+    "/smashlist/all": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_all",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/item` endpoint with a JSON object in the request body.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "This item has been created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Name": {
+                        "type": "string"
+                      },
+                      "Description": {
+                        "type": "string"
+                      },
+                      "Creator": {
+                        "type": "string"
+                      },
+                      "CreationDate": {
+                        "type": "string"
+                      },
+                      "Categorie": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/user/history": {
       "get": {
         "summary": "",
