@@ -1694,6 +1694,25 @@
           }
         ]
       }
+    },
+    "/smashlist/search": {
+      "get": {
+        "summary": "",
+        "operationId": "Get_smashlist_search",
+        "tags": ["Smashlist"],
+        "description": "To get all items of a smashlist, send a GET request to the `/smashlist/search` endpoint with a JSON object in the request body.",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "The name of the smashlist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
     }
   }
 }
